@@ -1,0 +1,61 @@
+.todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.5)
+;
+    padding: 17px 0;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.todo div{
+    display: flex;
+    gap: 10px;
+}
+
+.todo__title{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.todo__title.checked{
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.todo__title{
+    font-size: 20px;
+}
+
+/* Basic checkbox styling */
+input[type="checkbox"] {
+    appearance: none; /* Remove default styling */
+    -webkit-appearance: none; /* For WebKit browsers */
+    width: 26px;
+    height: 26px;
+    border: 1px solid #6C63FF; /* Custom border color */
+    border-radius: 2px; /* Optional for rounded corners */
+    cursor: pointer;
+    position: relative;
+}
+
+/* When checkbox is checked */
+input[type="checkbox"]:checked {
+    background-color: #6C63FF;/* Change the background color when checked */
+    border-color: #6C63FF; /* Change the border color */
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 13px;
+    border-right: 3px solid white; /* Right line of arrow */
+    border-bottom: 3px solid white; /* Bottom line of arrow */
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    transform: rotate(45deg); /* Rotate to make it look like an arrow */
+}
