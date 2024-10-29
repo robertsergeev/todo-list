@@ -6,16 +6,16 @@ import "./TodoContainer.css"
 const TodoContainer: FC = () => {
     const {todos, error, isLoading} = useAppSelector(state => state.todo)
 
-    if (isLoading) {
-        return <h1>Loading...</h1>
-    }
-
-    if (error) {
-        return <h1>Error!</h1>
-    }
-
     return (
         <div className='todo-container'>
+            {
+                isLoading &&
+                <div className="container"><h1>Loading...</h1></div>
+            }
+            {
+                error &&
+                <div className="container"><h1>Error!</h1></div>
+            }
             {
                 todos.map(todo =>
                     <TodoItem key={todo.id} todo={todo}/>
