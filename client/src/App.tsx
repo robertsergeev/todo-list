@@ -21,7 +21,7 @@ const App: FC = () => {
     }
 
     return (         
-        <div>
+        <div className='App'>
             <Modal visible={displayed} setVisible={setModal} >
                 <CreateTodoForm/>
             </Modal>
