@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {todoReducer} from "./reducers/todoReducer.ts";
+import {modalReducer} from "./reducers/modalReducer.ts";
 
 export const store = configureStore({
     reducer: {
-        todo: todoReducer
+        todo: todoReducer,
+        modal: modalReducer,
     },
     devTools: true,
 })

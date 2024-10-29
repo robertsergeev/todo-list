@@ -22,3 +22,8 @@
     min-width: 500px;
 }
 
+@media (max-width: 530px) {
+    .modal__content {
+        min-width: 80%;
+    }
+}

@@ -1,13 +1,14 @@
 import {FC} from 'react';
 import "./CreateButton.css"
+import {useAppDispatch} from "../../hooks/redux.ts";
+import {changeModalVisibility} from "../../store/reducers/modalReducer.ts";
 
-interface CreateButtonProps {
-    setModal: (arg: boolean) => void,
-}
 
-const CreateButton: FC<CreateButtonProps> = ({setModal}) => {
+const CreateButton: FC = () => {
+    const dispatch = useAppDispatch()
+
     const handleOnClick = () => {
-        setModal(true)
+        dispatch(changeModalVisibility(true))
     }
 
     return (

@@ -1,4 +1,4 @@
-import {fetchAllTodosPayload, TodoState} from "../../types/todo.ts";
+import {fetchAllTodosPayload, ITodo, TodoState} from "../../types/todo.ts";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchAllTodos} from "../action-creators/fetchAllTodos.ts";
 
@@ -14,7 +14,11 @@ const initialState: TodoState = {
 export const todoSlice = createSlice({
     name: 'todo',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        addNewTodo(state, action: PayloadAction<ITodo>) {
+            state.todos.push(action.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchAllTodos.pending, (state) => {
             state.isLoading = true;
@@ -35,3 +39,5 @@ export const todoSlice = createSlice({
 })
 
 export const todoReducer = todoSlice.reducer
+export const todoActions = todoSlice.actions
+export const {addNewTodo} = todoActions
