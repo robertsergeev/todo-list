@@ -7,9 +7,13 @@
 }
 
 body{
-    padding: 20px 0 0 0;
     font-family: Kanit, sans-serif;
     background-color: #f7f7f7;
+    min-height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
 }
 
 .container {
@@ -18,3 +22,9 @@ body{
     padding: 0 10px;
 }
 
+
+.App {
+    min-height: 100vh;
+    padding: 20px 0 0 0;
+    position: relative;
+}

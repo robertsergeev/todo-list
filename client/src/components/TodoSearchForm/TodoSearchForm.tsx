@@ -9,7 +9,6 @@ const TodoSearchForm: FC = () => {
                 <form className="todo-form__form">
                     {/*@ts-ignore */}
                     <Input placeholder={"Search note..."} type="text"/>
-                    <button></button>
                 </form>
             </div>
         </div>
