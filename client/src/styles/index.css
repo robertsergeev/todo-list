@@ -12,10 +12,6 @@ body{
     min-height: 100vh;
 }
 
-#root {
-    min-height: 100vh;
-}
-
 .container {
     max-width: 750px;
     margin: 0 auto;
@@ -24,7 +20,5 @@ body{
 
 
 .App {
-    min-height: 100vh;
     padding: 20px 0 0 0;
-    position: relative;
 }
