@@ -9,8 +9,8 @@ import CreateTodoForm from "./components/CreateTodoForm/CreateTodoForm.tsx";
 import {changeModalVisibility} from "./store/reducers/modalReducer.ts";
 
 const App: FC = () => {
-    const dispatch = useAppDispatch()
-    const {displayed} = useAppSelector(state => state.modal)
+    const dispatch = useAppDispatch();
+    const {displayed} = useAppSelector(state => state.modal);
 
     useEffect(() => {
         dispatch(fetchAllTodos({page: 1, limit: 10}))

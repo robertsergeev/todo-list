@@ -7,7 +7,7 @@ import {addNewTodo} from "../../store/reducers/todoReducer.ts";
 import {changeModalVisibility} from "../../store/reducers/modalReducer.ts";
 
 const CreateTodoForm: FC = () => {
-    const [newTodo, setNewTodo] = useState<ITodo>({title: '', id: 0, completed: false})
+    const [newTodo, setNewTodo] = useState<ITodo>({title: '', id: Date.now(), completed: false})
     const dispatch = useAppDispatch()
 
     const setNewTodoTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,13 +27,14 @@ const CreateTodoForm: FC = () => {
         if(newTodo.title) {
             dispatch(addNewTodo(newTodo))
         }
-        setNewTodo({...newTodo, title: ''})
+        setNewTodo({...newTodo, title: '', id: Date.now()})
         dispatch(changeModalVisibility(false))
     }
 
     return (
         <form className='create-todo-form' name="Create Todo Form">
             <h2>new note</h2>
+            {/*TODO: type input!!!*/}
             {/*@ts-ignore*/}
             <Input value={newTodo.title} onChange={setNewTodoTitle} placeholder={"Input your note..."}/>
             <div className='create-todo__btns'>

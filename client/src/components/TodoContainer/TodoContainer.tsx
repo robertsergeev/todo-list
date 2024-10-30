@@ -2,9 +2,12 @@ import {FC} from 'react';
 import TodoItem from "../TodoItem/TodoItem.tsx";
 import {useAppSelector} from "../../hooks/redux.ts";
 import "./TodoContainer.css"
+import {useTodos} from "../../hooks/useTodos.ts";
 
 const TodoContainer: FC = () => {
     const {todos, error, isLoading} = useAppSelector(state => state.todo)
+    const {query} = useAppSelector(state => state.filter)
+    const searchedTodos = useTodos(todos, query)
 
     return (
         <div className='todo-container'>
@@ -17,7 +20,7 @@ const TodoContainer: FC = () => {
                 <div className="container"><h1>Error!</h1></div>
             }
             {
-                todos.map(todo =>
+                searchedTodos.map(todo =>
                     <TodoItem key={todo.id} todo={todo}/>
                 )
             }
