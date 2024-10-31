@@ -22,6 +22,7 @@ const App: FC = () => {
 
     return (         
         <div className='App'>
+            <h1>Todo List</h1>
             <Modal visible={displayed} setVisible={setModal} >
                 <CreateTodoForm/>
             </Modal>

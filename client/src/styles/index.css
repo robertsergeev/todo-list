@@ -22,3 +22,10 @@ body{
 .App {
     padding: 20px 0 0 0;
 }
+
+.App h1{
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}

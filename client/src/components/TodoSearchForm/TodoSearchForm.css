@@ -3,3 +3,8 @@
 .todo-form {
     margin-bottom: 30px;
 }
+
+.todo-form__form {
+    display: flex;
+    gap: 16px;
+}

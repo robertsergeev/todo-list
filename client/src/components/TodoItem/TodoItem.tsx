@@ -1,6 +1,8 @@
 import {FC, useState} from 'react';
 import {ITodo} from "../../types/todo.ts";
 import "./TodoItem.css"
+import {useAppDispatch} from "../../hooks/redux.ts";
+import {setTodoChecked} from "../../store/reducers/todoReducer.ts";
 
 interface TodoItemProps {
     todo: ITodo;
@@ -8,9 +10,11 @@ interface TodoItemProps {
 
 const TodoItem: FC<TodoItemProps> = ({todo}) => {
     const [checked, setChecked] = useState<boolean>(todo.completed)
+    const dispatch = useAppDispatch()
 
     const handleOnChange = () => {
         setChecked(value => !value)
+        dispatch(setTodoChecked({todo, value: !checked}))
     }
 
     return (

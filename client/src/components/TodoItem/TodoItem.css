@@ -59,3 +59,18 @@ input[type="checkbox"]:checked::after {
     left: 9px;
     transform: rotate(45deg); /* Rotate to make it look like an arrow */
 }
+
+.todo-item-enter {
+    opacity: 0;
+}
+.todo-item-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+}
+.todo-item-exit {
+    opacity: 1;
+}
+.todo-item-exit-active {
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+}

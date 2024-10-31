@@ -3,11 +3,12 @@ import TodoItem from "../TodoItem/TodoItem.tsx";
 import {useAppSelector} from "../../hooks/redux.ts";
 import "./TodoContainer.css"
 import {useTodos} from "../../hooks/useTodos.ts";
+import {TransitionGroup, CSSTransition} from "react-transition-group"
 
 const TodoContainer: FC = () => {
     const {todos, error, isLoading} = useAppSelector(state => state.todo)
-    const {query} = useAppSelector(state => state.filter)
-    const searchedTodos = useTodos(todos, query)
+    const {query, sort} = useAppSelector(state => state.filter)
+    const searchedTodos = useTodos(todos, sort, query)
 
     return (
         <div className='todo-container'>
@@ -19,11 +20,18 @@ const TodoContainer: FC = () => {
                 error &&
                 <div className="container"><h1>Error!</h1></div>
             }
-            {
-                searchedTodos.map(todo =>
-                    <TodoItem key={todo.id} todo={todo}/>
-                )
-            }
+
+            <TransitionGroup>
+                {
+                    searchedTodos.map(todo =>
+                    <CSSTransition key={todo.id} timeout={500} classNames='todo-item'>
+                        <TodoItem todo={todo}/>
+                    </CSSTransition>
+                    )
+                }
+            </TransitionGroup>
+
+
         </div>
     );
 };

@@ -2,12 +2,12 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface filterState {
     query: string;
-    filter: string;
+    sort: string;
 }
 
 const initialState: filterState = {
     query: '',
-    filter: '',
+    sort: '',
 }
 
 const filterSlice = createSlice({
@@ -18,11 +18,11 @@ const filterSlice = createSlice({
             state.query = action.payload;
         },
 
-        setFilter(state, action: PayloadAction<string>) {
-            state.filter = action.payload;
+        setSort(state, action: PayloadAction<string>) {
+            state.sort = action.payload;
         }
     }
 })
 
 export const filterReducer = filterSlice.reducer;
-export const {setFilter, setQuery} = filterSlice.actions;
+export const {setSort, setQuery} = filterSlice.actions;
