@@ -6,27 +6,36 @@ import TodoSearchForm from "./components/TodoSearchForm/TodoSearchForm.tsx";
 import CreateButton from "./components/CreateButton/CreateButton.tsx";
 import Modal from "./components/UI/Modal/Modal.tsx";
 import CreateTodoForm from "./components/CreateTodoForm/CreateTodoForm.tsx";
-import {changeModalVisibility} from "./store/reducers/modalReducer.ts";
+import {changeModalVisibility, modalNames} from "./store/reducers/modalReducer.ts";
 
 const App: FC = () => {
     const dispatch = useAppDispatch();
-    const {displayed} = useAppSelector(state => state.modal);
+    const {modals} = useAppSelector(state => state.modal);
 
     useEffect(() => {
         dispatch(fetchAllTodos({page: 1, limit: 10}))
     }, [])
 
-    const setModal = (arg: boolean) => {
-        dispatch(changeModalVisibility(arg))
+    const setCreateModal = (arg: boolean) => {
+        dispatch(changeModalVisibility({modalName: modalNames.createTodoModal, value: arg}))
     }
 
-    return (         
+    const setEditModal = (arg: boolean) => {
+        dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: arg}))
+    }
+
+    return (
         <div className='App'>
             <h1>Todo List</h1>
-            <Modal visible={displayed} setVisible={setModal} >
+            <Modal visible={modals[modalNames.createTodoModal]} setVisible={setCreateModal}>
                 <CreateTodoForm/>
             </Modal>
-            <TodoSearchForm />
+
+            <Modal visible={modals[modalNames.editTodoModal]} setVisible={setEditModal}>
+                <h1>Edit todo</h1>
+            </Modal>
+
+            <TodoSearchForm/>
             <TodoContainer/>
             <CreateButton/>
         </div>

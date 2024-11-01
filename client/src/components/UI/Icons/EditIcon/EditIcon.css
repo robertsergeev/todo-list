@@ -1,0 +1,17 @@
+.edit-icon{
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.edit-icon path{
+    transition: all 0.3s ease;
+}
+
+.edit-icon:hover path{
+    stroke: black;
+}
+
+.edit-icon:hover{
+    scale: 1.3;
+}

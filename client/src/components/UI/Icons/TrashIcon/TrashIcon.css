@@ -1,0 +1,17 @@
+.trash-icon{
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.trash-icon path{
+    transition: all 0.3s ease;
+}
+
+.trash-icon:hover path{
+    stroke: black;
+}
+
+.trash-icon:hover{
+    scale: 1.3;
+}

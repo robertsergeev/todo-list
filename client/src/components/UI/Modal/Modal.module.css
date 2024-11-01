@@ -5,7 +5,18 @@
     left: 0;
     right: 0;
     display: none;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: modalAnim 0.2s ease;
+}
+
+@keyframes modalAnim{
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .modal.active {

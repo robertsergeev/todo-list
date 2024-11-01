@@ -3,6 +3,9 @@ import {ITodo} from "../../types/todo.ts";
 import "./TodoItem.css"
 import {useAppDispatch} from "../../hooks/redux.ts";
 import {setTodoChecked} from "../../store/reducers/todoReducer.ts";
+import EditIcon from "../UI/Icons/EditIcon/EditIcon.tsx";
+import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
+import TrashIcon from "../UI/Icons/TrashIcon/TrashIcon.tsx";
 
 interface TodoItemProps {
     todo: ITodo;
@@ -17,6 +20,10 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
         dispatch(setTodoChecked({todo, value: !checked}))
     }
 
+    const openEditModal = () => {
+        dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: true}))
+    }
+
     return (
         <div className="todo">
             <div>
@@ -28,9 +35,8 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
                 </div>
             </div>
             <div className="todo__btns">
-                {/*<button>Date</button>*/}
-                {/*<button>Edit</button>*/}
-                {/*<button>Delete</button>*/}
+                <EditIcon onClick={openEditModal}/>
+                <TrashIcon />
             </div>
         </div>
     );

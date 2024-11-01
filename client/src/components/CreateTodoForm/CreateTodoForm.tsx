@@ -4,7 +4,7 @@ import Input from "../UI/Input/Input.tsx";
 import {ITodo} from "../../types/todo.ts";
 import {useAppDispatch} from "../../hooks/redux.ts";
 import {addNewTodo} from "../../store/reducers/todoReducer.ts";
-import {changeModalVisibility} from "../../store/reducers/modalReducer.ts";
+import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
 
 const CreateTodoForm: FC = () => {
     const [newTodo, setNewTodo] = useState<ITodo>({title: '', id: Date.now(), completed: false})
@@ -18,7 +18,7 @@ const CreateTodoForm: FC = () => {
         e.preventDefault()
 
         setNewTodo({...newTodo, title: ''})
-        dispatch(changeModalVisibility(false))
+        dispatch(changeModalVisibility({modalName: modalNames.createTodoModal, value: false}))
     }
 
     const handleOnNewTodoCreation = (e: React.MouseEvent) => {
@@ -28,7 +28,7 @@ const CreateTodoForm: FC = () => {
             dispatch(addNewTodo(newTodo))
         }
         setNewTodo({...newTodo, title: '', id: Date.now()})
-        dispatch(changeModalVisibility(false))
+        dispatch(changeModalVisibility({modalName: modalNames.createTodoModal, value: false}))
     }
 
     return (
