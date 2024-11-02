@@ -2,7 +2,7 @@ import {FC, useState} from 'react';
 import {ITodo} from "../../types/todo.ts";
 import "./TodoItem.css"
 import {useAppDispatch} from "../../hooks/redux.ts";
-import {setTodoChecked} from "../../store/reducers/todoReducer.ts";
+import {removeTodo, setTodoChecked} from "../../store/reducers/todoReducer.ts";
 import EditIcon from "../UI/Icons/EditIcon/EditIcon.tsx";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
 import TrashIcon from "../UI/Icons/TrashIcon/TrashIcon.tsx";
@@ -24,6 +24,10 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
         dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: true}))
     }
 
+    const handleDeleteTodo = () => {
+        dispatch(removeTodo(todo))
+    }
+
     return (
         <div className="todo">
             <div>
@@ -36,7 +40,7 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
             </div>
             <div className="todo__btns">
                 <EditIcon onClick={openEditModal}/>
-                <TrashIcon />
+                <TrashIcon onClick={handleDeleteTodo}/>
             </div>
         </div>
     );
