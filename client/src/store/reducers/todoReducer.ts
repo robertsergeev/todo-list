@@ -23,6 +23,16 @@ export const todoSlice = createSlice({
             state.todos = state.todos.filter(todo => todo.id !== action.payload.id)
         },
 
+        editTodo(state, action: PayloadAction<{ todo: ITodo, value: string }>) {
+            state.todos = state.todos.filter(todo => {
+                if(todo.id == action.payload.todo.id) {
+                    todo.title = action.payload.value;
+                    return todo;
+                }
+                return todo;
+            })
+        },
+
         setTodoChecked(state, action: PayloadAction<{ todo: ITodo, value: boolean }>) {
             state.todos = state.todos.filter(todo => {
                 if(todo.id == action.payload.todo.id) {
@@ -54,4 +64,4 @@ export const todoSlice = createSlice({
 
 export const todoReducer = todoSlice.reducer
 export const todoActions = todoSlice.actions
-export const {addNewTodo, setTodoChecked, removeTodo} = todoActions
+export const {addNewTodo, setTodoChecked, removeTodo, editTodo} = todoActions

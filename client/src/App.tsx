@@ -7,6 +7,7 @@ import CreateButton from "./components/CreateButton/CreateButton.tsx";
 import Modal from "./components/UI/Modal/Modal.tsx";
 import CreateTodoForm from "./components/CreateTodoForm/CreateTodoForm.tsx";
 import {changeModalVisibility, modalNames} from "./store/reducers/modalReducer.ts";
+import EditTodoForm from "./components/EditTodoForm/EditTodoForm.tsx";
 
 const App: FC = () => {
     const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ const App: FC = () => {
             </Modal>
 
             <Modal visible={modals[modalNames.editTodoModal]} setVisible={setEditModal}>
-                <h1>Edit todo</h1>
+                <EditTodoForm />
             </Modal>
 
             <TodoSearchForm/>
