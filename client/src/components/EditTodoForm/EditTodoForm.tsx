@@ -1,15 +1,32 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import "./EditTodoForm.css"
 import Input from "../UI/Input/Input.tsx";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
-import {useAppDispatch} from "../../hooks/redux.ts";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
+import {editTodo, setCurrentTodo} from "../../store/reducers/todoReducer.ts";
 
 const EditTodoForm: FC = () => {
     const dispatch = useAppDispatch()
+    const {currentTodo} = useAppSelector(state => state.todo)
+    const [editedTodoText, setEditedTodoText] = useState<string>("")
 
     const closeForm = (e: React.MouseEvent) => {
         e.preventDefault()
+        dispatch(setCurrentTodo(null))
         dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: false}))
+        setEditedTodoText("")
+    }
+
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEditedTodoText(e.target.value)
+    }
+
+    const handleTodoEdit = (e: React.MouseEvent) => {
+        e.preventDefault()
+        dispatch(editTodo(editedTodoText))
+        dispatch(setCurrentTodo(null))
+        dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: false}))
+        setEditedTodoText("")
     }
 
     return (
@@ -17,10 +34,10 @@ const EditTodoForm: FC = () => {
             <h2>Edit Todo</h2>
             {/*TODO: type input!!!*/}
             {/*@ts-ignore*/}
-            <Input />
+            <Input value={editedTodoText} onChange={handleOnChange} placeholder={currentTodo?.title}/>
             <div className='edit-todo__btns'>
                 <button onClick={closeForm}>Cancel</button>
-                <button >Apply</button>
+                <button onClick={handleTodoEdit}>Apply</button>
             </div>
         </form>
     );

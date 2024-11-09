@@ -2,7 +2,7 @@ import {FC, useState} from 'react';
 import {ITodo} from "../../types/todo.ts";
 import "./TodoItem.css"
 import {useAppDispatch} from "../../hooks/redux.ts";
-import {removeTodo, setTodoChecked} from "../../store/reducers/todoReducer.ts";
+import {removeTodo, setCurrentTodo, setTodoChecked} from "../../store/reducers/todoReducer.ts";
 import EditIcon from "../UI/Icons/EditIcon/EditIcon.tsx";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
 import TrashIcon from "../UI/Icons/TrashIcon/TrashIcon.tsx";
@@ -21,6 +21,7 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
     }
 
     const openEditModal = () => {
+        dispatch(setCurrentTodo(todo))
         dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: true}))
     }
 

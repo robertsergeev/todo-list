@@ -6,6 +6,7 @@ export interface ITodo {
 
 export interface TodoState {
     todos: ITodo[];
+    currentTodo: ITodo | null;
     page: number;
     limit: number;
     totalTodos: number;

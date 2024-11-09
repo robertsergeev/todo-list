@@ -4,6 +4,7 @@ import {fetchAllTodos} from "../action-creators/fetchAllTodos.ts";
 
 const initialState: TodoState = {
     todos: [],
+    currentTodo: null,
     page: 1,
     limit: 10,
     totalTodos: 0,
@@ -16,30 +17,37 @@ export const todoSlice = createSlice({
     initialState: initialState,
     reducers: {
         addNewTodo(state, action: PayloadAction<ITodo>) {
-            state.todos = [action.payload, ...state.todos]
+            state.todos = [action.payload, ...state.todos];
         },
 
         removeTodo(state, action: PayloadAction<ITodo>) {
-            state.todos = state.todos.filter(todo => todo.id !== action.payload.id)
+            state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
         },
 
-        editTodo(state, action: PayloadAction<{ todo: ITodo, value: string }>) {
-            state.todos = state.todos.filter(todo => {
-                if(todo.id == action.payload.todo.id) {
-                    todo.title = action.payload.value;
-                    return todo;
-                }
-                return todo;
-            })
+        setCurrentTodo(state, action: PayloadAction<ITodo | null>) {
+            state.currentTodo = action.payload;
+        },
+
+
+        editTodo(state, action: PayloadAction<string>) {
+            if(state.currentTodo !== null) {
+                state.todos = state.todos.map(todo =>
+                    todo.id === state.currentTodo!.id
+                        ? {...todo, title: action.payload}
+                        : todo
+                )
+
+            }
+
         },
 
         setTodoChecked(state, action: PayloadAction<{ todo: ITodo, value: boolean }>) {
             state.todos = state.todos.filter(todo => {
                 if(todo.id == action.payload.todo.id) {
                     todo.completed = action.payload.value;
-                    return todo
+                    return todo;
                 }
-                return todo
+                return todo;
             })
         },
     },
@@ -64,4 +72,4 @@ export const todoSlice = createSlice({
 
 export const todoReducer = todoSlice.reducer
 export const todoActions = todoSlice.actions
-export const {addNewTodo, setTodoChecked, removeTodo, editTodo} = todoActions
+export const {addNewTodo, setTodoChecked, removeTodo, setCurrentTodo, editTodo} = todoActions
