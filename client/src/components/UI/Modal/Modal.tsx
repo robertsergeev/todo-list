@@ -10,7 +10,7 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({children, visible, setVisible}) => {
     const rootClasses = [classes.modal]
 
-    if(visible) {
+    if (visible) {
         rootClasses.push(classes.active)
     }
 

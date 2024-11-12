@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, memo} from 'react';
 import {ITodo} from "../../types/todo.ts";
 import "./TodoItem.css"
 import {useAppDispatch} from "../../hooks/redux.ts";
@@ -47,4 +47,4 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
     );
 };
 
-export default TodoItem;
+export default memo(TodoItem);

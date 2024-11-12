@@ -17,7 +17,7 @@ export const fetchAllTodos = createAsyncThunk(
                 }
             })
             const totalTodos = Number(response.headers['x-total-count']);
-            const todos = response.data;
+            const todos = await response.data;
             return {todos, totalTodos}
         } catch (err) {
             if(err instanceof Error) return thunkAPI.rejectWithValue(err.message);

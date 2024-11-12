@@ -21,7 +21,10 @@ const CreateTodoForm: FC = () => {
         dispatch(changeModalVisibility({modalName: modalNames.createTodoModal, value: false}))
     }
 
-    const handleOnNewTodoCreation = (e: React.MouseEvent) => {
+    const handleOnNewTodoCreation = (e: React.FormEvent) => {
+        console.log('submit')
+        console.log(e)
+
         e.preventDefault()
 
         if(newTodo.title) {
@@ -32,14 +35,14 @@ const CreateTodoForm: FC = () => {
     }
 
     return (
-        <form className='create-todo-form' name="Create Todo Form">
+        <form onSubmit={handleOnNewTodoCreation} className='create-todo-form' name="Create Todo Form">
             <h2>new note</h2>
             {/*TODO: type input!!!*/}
             {/*@ts-ignore*/}
             <Input value={newTodo.title} onChange={setNewTodoTitle} placeholder={"Input your note..."}/>
             <div className='create-todo__btns'>
                 <button onClick={closeForm}>Cancel</button>
-                <button onClick={handleOnNewTodoCreation}>Apply</button>
+                <button type='submit'>Apply</button>
             </div>
         </form>
     );

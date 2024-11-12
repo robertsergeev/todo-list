@@ -4,9 +4,9 @@ import {fetchAllTodos} from "./store/action-creators/fetchAllTodos.ts";
 import TodoContainer from "./components/TodoContainer/TodoContainer.tsx";
 import TodoSearchForm from "./components/TodoSearchForm/TodoSearchForm.tsx";
 import CreateButton from "./components/CreateButton/CreateButton.tsx";
+import {changeModalVisibility, modalNames} from "./store/reducers/modalReducer.ts";
 import Modal from "./components/UI/Modal/Modal.tsx";
 import CreateTodoForm from "./components/CreateTodoForm/CreateTodoForm.tsx";
-import {changeModalVisibility, modalNames} from "./store/reducers/modalReducer.ts";
 import EditTodoForm from "./components/EditTodoForm/EditTodoForm.tsx";
 
 const App: FC = () => {
@@ -33,8 +33,9 @@ const App: FC = () => {
             </Modal>
 
             <Modal visible={modals[modalNames.editTodoModal]} setVisible={setEditModal}>
-                <EditTodoForm />
+                <EditTodoForm/>
             </Modal>
+
 
             <TodoSearchForm/>
             <TodoContainer/>

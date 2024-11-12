@@ -4,6 +4,7 @@ import {useAppSelector} from "../../hooks/redux.ts";
 import "./TodoContainer.css"
 import {useTodos} from "../../hooks/useTodos.ts";
 import {TransitionGroup, CSSTransition} from "react-transition-group"
+import Loader from "../UI/Loader/Loader.tsx";
 
 const TodoContainer: FC = () => {
     const {todos, error, isLoading} = useAppSelector(state => state.todo)
@@ -14,7 +15,7 @@ const TodoContainer: FC = () => {
         <div className='todo-container'>
             {
                 isLoading &&
-                <div className="container"><h1>Loading...</h1></div>
+                <div className="container"><Loader /></div>
             }
             {
                 error &&
