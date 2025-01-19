@@ -6,6 +6,7 @@ import {removeTodo, setCurrentTodo, setTodoChecked} from "../../store/reducers/t
 import EditIcon from "../UI/Icons/EditIcon/EditIcon.tsx";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
 import TrashIcon from "../UI/Icons/TrashIcon/TrashIcon.tsx";
+import axios from "axios";
 
 interface TodoItemProps {
     todo: ITodo;
@@ -18,6 +19,20 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
     const handleOnChange = () => {
         setChecked(value => !value)
         dispatch(setTodoChecked({todo, value: !checked}))
+
+        const token = localStorage.getItem('token')
+        try {
+            axios.patch(`http://localhost:3000/todo/${todo.id}/toggle_completed`, {
+                completed: !checked
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     const openEditModal = () => {
@@ -27,6 +42,19 @@ const TodoItem: FC<TodoItemProps> = ({todo}) => {
 
     const handleDeleteTodo = () => {
         dispatch(removeTodo(todo))
+
+        const token = localStorage.getItem('token')
+        try {
+            axios.delete(`http://localhost:3000/todo/${todo.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(res => console.log(res))
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (

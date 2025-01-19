@@ -4,6 +4,7 @@ import Input from "../UI/Input/Input.tsx";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.ts";
 import {editTodo, setCurrentTodo} from "../../store/reducers/todoReducer.ts";
+import axios from "axios";
 
 const EditTodoForm: FC = () => {
     const dispatch = useAppDispatch()
@@ -24,6 +25,25 @@ const EditTodoForm: FC = () => {
     const handleTodoEdit = (e: React.MouseEvent) => {
         e.preventDefault()
         dispatch(editTodo(editedTodoText))
+
+        const token = localStorage.getItem('token')
+
+        try {
+            if(currentTodo) {
+                axios.patch(`http://localhost:3000/todo/${currentTodo.id}/change_title`, {
+                    title: editedTodoText
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+
         dispatch(setCurrentTodo(null))
         dispatch(changeModalVisibility({modalName: modalNames.editTodoModal, value: false}))
         setEditedTodoText("")

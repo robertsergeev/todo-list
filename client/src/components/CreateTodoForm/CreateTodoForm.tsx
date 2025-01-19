@@ -5,6 +5,7 @@ import {ITodo} from "../../types/todo.ts";
 import {useAppDispatch} from "../../hooks/redux.ts";
 import {addNewTodo} from "../../store/reducers/todoReducer.ts";
 import {changeModalVisibility, modalNames} from "../../store/reducers/modalReducer.ts";
+import axios from "axios";
 
 const CreateTodoForm: FC = () => {
     const [newTodo, setNewTodo] = useState<ITodo>({title: '', id: Date.now(), completed: false})
@@ -22,13 +23,29 @@ const CreateTodoForm: FC = () => {
     }
 
     const handleOnNewTodoCreation = (e: React.FormEvent) => {
-        console.log('submit')
-        console.log(e)
-
         e.preventDefault()
 
         if(newTodo.title) {
             dispatch(addNewTodo(newTodo))
+
+            const token = localStorage.getItem('token')
+
+            if(token) {
+                try {
+                    axios.post('http://localhost:3000/todo/todos', {
+                        title: newTodo.title
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                } catch (e) {
+                    console.log(e);
+                }
+
+            }
+
         }
         setNewTodo({...newTodo, title: '', id: Date.now()})
         dispatch(changeModalVisibility({modalName: modalNames.createTodoModal, value: false}))

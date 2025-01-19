@@ -1,0 +1,36 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #5c6bc0;
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #5c6bc0;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
